@@ -86,14 +86,10 @@ describe("rankings", () => {
         : request.reject.response);
     });
 
-    test("should return status code 400", () =>
-      expect(response.status).toBe(400));
-    test("should return status text - Bad Request", () =>
-      expect(response.statusText).toBe("Bad Request"));
-    test("should return error with boolean of true", () =>
-      expect(response.data.error).toBe(true));
-    test("should contain message property", () =>
-      expect(response.data).toHaveProperty("message"));
+    test("should return status code 200", () =>
+      expect(response.status).toBe(200));
+    test("should return status text - OK", () =>
+      expect(response.statusText).toBe("OK"));
     test("should be an object result", () =>
       expect(response.data).toBeInstanceOf(Object));
   });
