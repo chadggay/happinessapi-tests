@@ -1241,41 +1241,6 @@ describe("profile", () => {
           ));
       });
 
-      describe("with valid formatted non-real date", () => {
-        beforeAll(async () => {
-          const request = await to.object(
-            instance.put(
-              `${REMOTE_API_URL}/user/${EMAIL_USER_ONE}/profile`,
-              {
-                firstName: FIRST_NAME_USER_ONE,
-                lastName: LAST_NAME_USER_ONE,
-                address: ADDRESS_USER_ONE,
-                dob: new Date().toISOString(),
-              },
-              {
-                headers: { Authorization: `Bearer ${TOKEN_USER_ONE}` },
-              }
-            )
-          );
-          return (response = request.resolve
-            ? request.resolve
-            : request.reject.response);
-        });
-
-        test("should return status code 400", () =>
-          expect(response.status).toBe(400));
-        test("should return status text - Bad Request", () =>
-          expect(response.statusText).toBe("Bad Request"));
-        test("should return error with boolean of true", () =>
-          expect(response.data.error).toBe(true));
-        test("should contain message property", () =>
-          expect(response.data).toHaveProperty("message"));
-        test("should return a specific message for 'Invalid input: dob must be a real date in format YYYY-MM-DD.'", () =>
-          expect(response.data.message).toBe(
-            "Invalid input: dob must be a real date in format YYYY-MM-DD."
-          ));
-      });
-
       describe("with valid formatted non-real date (out of bounds check)", () => {
         beforeAll(async () => {
           const request = await to.object(
